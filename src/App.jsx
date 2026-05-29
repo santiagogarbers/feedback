@@ -19,7 +19,7 @@ export default function App() {
   const [messages, setMessages] = useState([]);
   const [showCommandBar, setShowCommandBar] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
-  const [chatOpen, setChatOpen] = useState(true);
+  const [chatOpen, setChatOpen] = useState(false);
   const [theme, setTheme] = useState('light');
   const [versions, setVersions] = useState([]);
   const versionNumRef = useRef(0);
