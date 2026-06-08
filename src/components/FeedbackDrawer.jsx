@@ -9,7 +9,7 @@ const IMPORTANCE_OPTIONS = [
   'Muy importante',
 ];
 
-const HELP_CENTER_URL = 'HELP_CENTER_URL';
+const HELP_CENTER_URL = 'https://help.botmaker.com/es/support';
 
 export default function FeedbackDropdown({ open, onClose }) {
   const [request, setRequest] = useState('');
