@@ -38,6 +38,7 @@ function IconBtn({ title, onClick, active, children, style }) {
 
 export default function TopBar({ onCommandBar, theme, onToggleTheme }) {
   const [feedbackOpen, setFeedbackOpen] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
 
   return (
     <div style={{
@@ -73,6 +74,22 @@ export default function TopBar({ onCommandBar, theme, onToggleTheme }) {
       }}>
         Atención al cliente
       </span>
+
+      <button
+        onClick={() => setShowTooltip(v => !v)}
+        style={{
+          display: 'flex', alignItems: 'center', gap: 3,
+          padding: '2px 8px', borderRadius: 'var(--radius-sm)',
+          fontSize: 11, fontWeight: 500,
+          color: showTooltip ? 'var(--accent)' : 'var(--text-tertiary)',
+          background: showTooltip ? 'var(--accent-dim)' : 'transparent',
+          border: `1px solid ${showTooltip ? 'var(--accent-border)' : 'var(--border)'}`,
+          cursor: 'pointer', transition: 'all .15s',
+          whiteSpace: 'nowrap', flexShrink: 0,
+        }}
+      >
+        Activar tooltip
+      </button>
 
       <div style={{ flex: 1 }} />
 
@@ -124,6 +141,40 @@ export default function TopBar({ onCommandBar, theme, onToggleTheme }) {
             <MessageSquarePlus size={17} />
           </IconBtn>
           <FeedbackDropdown open={feedbackOpen} onClose={() => setFeedbackOpen(false)} />
+
+          {showTooltip && (
+            <div
+              onAnimationEnd={() => setShowTooltip(false)}
+              style={{
+                position: 'absolute',
+                top: 'calc(100% + 10px)',
+                right: 0,
+                width: 230,
+                background: 'var(--bg-elevated)',
+                border: '1px solid var(--border-strong)',
+                borderRadius: 'var(--radius-md)',
+                padding: '10px 12px',
+                fontSize: 12,
+                lineHeight: 1.5,
+                color: 'var(--text-primary)',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
+                zIndex: 50,
+                animation: 'tooltip-lifecycle 5s ease forwards',
+                transformOrigin: 'top right',
+              }}
+            >
+              <div style={{
+                position: 'absolute',
+                top: -5, right: 11,
+                width: 9, height: 9,
+                background: 'var(--bg-elevated)',
+                borderTop: '1px solid var(--border-strong)',
+                borderLeft: '1px solid var(--border-strong)',
+                transform: 'rotate(45deg)',
+              }} />
+              👋 Recuerda que puedes enviarnos feedback cuando quieras.
+            </div>
+          )}
         </div>
 
         <div style={{ width: 1, height: 20, background: 'var(--border)', margin: '0 4px' }} />
